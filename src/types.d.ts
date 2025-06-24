@@ -6,3 +6,5 @@ declare module '*.gif';
 declare module '*.svg';
 declare module '*.webp';
 declare module '*.PNG';
+declare module '*.mp4';
+declare module '*.mp3';

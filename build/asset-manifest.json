@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7e9af287.css",
+    "main.js": "/static/js/main.19c9a0b8.js",
+    "static/js/453.0cd8399d.chunk.js": "/static/js/453.0cd8399d.chunk.js",
+    "static/media/glove.png": "/static/media/glove.91a0b50649eb9fb5090c.png",
+    "static/media/workshop.PNG": "/static/media/workshop.c1d8fa6ef22dec852666.PNG",
+    "static/media/MSSansSerif.ttf": "/static/media/MSSansSerif.aa14e7b110864a3c2e08.ttf",
+    "static/media/Nasser_Alsunaid_2025_Resume.pdf": "/static/media/Nasser_Alsunaid_2025_Resume.d07495338aa6a412fea4.pdf",
+    "static/media/currentme.jpg": "/static/media/currentme.3cfc8d189390b3d46d5b.jpg",
+    "static/media/team.jpeg": "/static/media/team.223074e2a18cf1b57a68.jpeg",
+    "static/media/workingAtComputer.jpg": "/static/media/workingAtComputer.914c1c34709de6fadc79.jpg",
+    "static/media/login.jpg": "/static/media/login.310eecc9702e66d70130.jpg",
+    "static/media/CAPM.png": "/static/media/CAPM.28e1989e025905ef7540.png",
+    "static/media/book.gif": "/static/media/book.d8fe373582a98d69dc18.gif",
+    "static/media/ee.jpg": "/static/media/ee.7656e3a317181c8a39b1.jpg",
+    "static/media/forHireGif.gif": "/static/media/forHireGif.a891bf17753104995062.gif",
+    "static/media/Terminal.ttf": "/static/media/Terminal.6a1b7290048681921b2c.ttf",
+    "static/media/neverGiveUp.jpg": "/static/media/neverGiveUp.c9ee4e48677de77065a9.jpg",
+    "static/media/Millennium.ttf": "/static/media/Millennium.e16d74a8e8e0567ce30e.ttf",
+    "static/media/Millennium-Bold.ttf": "/static/media/Millennium-Bold.cd5e3be832ebd008c852.ttf",
+    "static/media/computer.webp": "/static/media/computer.c9ab39f67dde4d60420c.webp",
+    "static/media/capture.mp3": "/static/media/capture.79c343c9a73327f96d37.mp3",
+    "static/media/move-check.mp3": "/static/media/move-check.ad20ee460e36e430c691.mp3",
+    "static/media/castle.mp3": "/static/media/castle.63734591c56a12f06621.mp3",
+    "static/media/game-end.mp3": "/static/media/game-end.af5b51f73c0d382cf5eb.mp3",
+    "static/media/game-start.mp3": "/static/media/game-start.306672acae5b0afee089.mp3",
+    "static/media/promote.mp3": "/static/media/promote.418aef6dde4fc83d51b4.mp3",
+    "static/media/illegal.mp3": "/static/media/illegal.090e273acfedc7a1e234.mp3",
+    "static/media/move-opponent.mp3": "/static/media/move-opponent.58babf5a3c2af82fd764.mp3",
+    "static/media/move-self.mp3": "/static/media/move-self.f4280e96965e14433c3b.mp3",
+    "index.html": "/index.html",
+    "main.7e9af287.css.map": "/static/css/main.7e9af287.css.map",
+    "main.19c9a0b8.js.map": "/static/js/main.19c9a0b8.js.map",
+    "453.0cd8399d.chunk.js.map": "/static/js/453.0cd8399d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7e9af287.css",
+    "static/js/main.19c9a0b8.js"
+  ]
+}

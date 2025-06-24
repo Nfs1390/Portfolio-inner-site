@@ -154,6 +154,27 @@ input {
     font-size: 18px;
 }
 
+input.aiterminal-input {
+  width: auto !important;
+  min-width: 1ch !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 14px !important;
+  color: #fff !important;
+  outline: none !important;
+  appearance: none !important;
+  caret-color: #fff !important;
+}
+
+input.aiterminal-input:focus, input.aiterminal-input:active {
+  background: none !important;
+}
+
 textarea {
     width: 100%;
     height: 150px;
@@ -253,6 +274,7 @@ input:active {
     overflow: hidden;
     transform: translate3d(0, 0, 0);
     overflow: hidden;
+    background: #fff;
 }
 
 .site-page-content {

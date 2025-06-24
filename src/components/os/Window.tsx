@@ -329,7 +329,7 @@ const Window: React.FC<WindowProps> = (props) => {
                     !isResizing
                         ? {
                               zIndex: -10000,
-                              pointerEvents: 'none',
+                              // pointerEvents: 'none', // TEMPORARILY DISABLED FOR DEBUGGING
                           }
                         : {
                               zIndex: 1000,
@@ -339,11 +339,11 @@ const Window: React.FC<WindowProps> = (props) => {
                 }
             >
                 <ResizeIndicator
+                    resizeRef={resizeRef}
                     top={top}
                     left={left}
                     width={width}
                     height={height}
-                    resizeRef={resizeRef}
                 />
             </div>
             <div
@@ -351,7 +351,7 @@ const Window: React.FC<WindowProps> = (props) => {
                     !isDragging
                         ? {
                               zIndex: -10000,
-                              pointerEvents: 'none',
+                              // pointerEvents: 'none', // TEMPORARILY DISABLED FOR DEBUGGING
                           }
                         : {
                               zIndex: 1000,
@@ -361,9 +361,9 @@ const Window: React.FC<WindowProps> = (props) => {
                 }
             >
                 <DragIndicator
+                    dragRef={dragRef}
                     width={width}
                     height={height}
-                    dragRef={dragRef}
                 />
             </div>
         </div>
@@ -439,7 +439,7 @@ const styles: StyleSheetCSS = {
         position: 'relative',
         // overflow: 'scroll',
         overflowX: 'hidden',
-        backgroundColor: Colors.white,
+        backgroundColor: 'transparent', // CHANGED from Colors.white to transparent for terminal apps
     },
     bottomBar: {
         flexShrink: 1,

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Colors from '../../constants/colors';
 import { Icon } from '../general';
-// import { } from '../general';
+import AITerminalApp, { AITerminalAppProps } from '../applications/AITerminalApp';
+
+//  import { } from '../general';
 // import Home from '../site/Home';
 // import Window from './Window';
 
@@ -9,6 +11,7 @@ export interface ToolbarProps {
     windows: DesktopWindows;
     toggleMinimize: (key: string) => void;
     shutdown: () => void;
+    AITerminalApp?: React.FC<AITerminalAppProps>; // <-- Add this line
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
@@ -87,6 +90,14 @@ const Toolbar: React.FC<ToolbarProps> = ({
         }
     };
 
+    // Launches the AI Terminal App and closes the start menu
+    function handleAITerminalClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+        event.stopPropagation();
+        setStartWindowOpen(false);
+        // Dispatch a custom event to open AI Terminal
+        window.dispatchEvent(new CustomEvent('open-ai-terminal'));
+    }
+
     return (
         <div style={styles.toolbarOuter}>
             {startWindowOpen && (
@@ -100,6 +111,22 @@ const Toolbar: React.FC<ToolbarProps> = ({
                         </div>
                         <div style={styles.startWindowContent}>
                             <div style={styles.startMenuSpace} />
+                            <div style={styles.startMenuLine} />
+
+                            <div
+                                className="start-menu-option"
+                                style={styles.startMenuOption}
+                                onMouseDown={handleAITerminalClick}  // Function to launch your app
+                            >
+                                <Icon
+                                    style={styles.startMenuIcon}
+                                    icon="console_prompt"  // Add your app icon here
+                                />
+                                <p style={styles.startMenuText}>
+                                    <u>C</u>omand Prompt
+                                </p>
+                            </div>
+
                             <div style={styles.startMenuLine} />
                             <div
                                 className="start-menu-option"
@@ -152,8 +179,8 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                         {},
                                         styles.tabContainerOuter,
                                         lastActive === key &&
-                                            !windows[key].minimized &&
-                                            styles.activeTabOuter
+                                        !windows[key].minimized &&
+                                        styles.activeTabOuter
                                     )}
                                     onMouseDown={() => toggleMinimize(key)}
                                 >
@@ -162,8 +189,8 @@ const Toolbar: React.FC<ToolbarProps> = ({
                                             {},
                                             styles.tabContainer,
                                             lastActive === key &&
-                                                !windows[key].minimized &&
-                                                styles.activeTabInner
+                                            !windows[key].minimized &&
+                                            styles.activeTabInner
                                         )}
                                     >
                                         <Icon

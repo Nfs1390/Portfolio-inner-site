@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import colors from '../../constants/colors';
-import twitterIcon from '../../assets/pictures/contact-twitter.png';
-import ghIcon from '../../assets/pictures/contact-gh.png';
 import inIcon from '../../assets/pictures/contact-in.png';
 import ResumeDownload from './ResumeDownload';
 import emailjs from '@emailjs/browser';
 
+import type { CSSProperties } from 'react'; // For type casting
+
 export interface ContactProps {}
 
-// function to validate email
+// Function to validate email
 const validateEmail = (email: string) => {
     const re =
         // eslint-disable-next-line
@@ -37,28 +37,45 @@ const Contact: React.FC<ContactProps> = (props) => {
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
     const [subject, setSubject] = useState('');
+
+    // State to track if a field has been touched (user interacted with it)
+    const [nameTouched, setNameTouched] = useState(false);
+    const [emailTouched, setEmailTouched] = useState(false);
+    const [subjectTouched, setSubjectTouched] = useState(false);
+    const [messageTouched, setMessageTouched] = useState(false);
+
     const [isFormValid, setIsFormValid] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [formMessage, setFormMessage] = useState('');
     const [formMessageColor, setFormMessageColor] = useState('');
 
+    // Derived validation states for individual fields
+    const isNameValid = name.trim().length > 0;
+    const isEmailValid = validateEmail(email);
+    const isSubjectValid = subject.trim().length > 0;
+    const isMessageValid = message.trim().length > 0;
+
     useEffect(() => {
-        if (
-            validateEmail(email) &&
-            name.trim().length > 0 &&
-            message.trim().length > 0 &&
-            subject.trim().length > 0
-        ) {
+        if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
             setIsFormValid(true);
         } else {
             setIsFormValid(false);
         }
-    }, [email, name, message, subject]);
+    }, [isNameValid, isEmailValid, isSubjectValid, isMessageValid]);
 
     async function submitForm() {
+        // Mark all fields as touched on submit attempt, to show all errors
+        setNameTouched(true);
+        setEmailTouched(true);
+        setSubjectTouched(true);
+        setMessageTouched(true);
+
         if (!isFormValid) {
-            setFormMessage('Form unable to validate, please try again.');
+            setFormMessage('Please fill in all required fields correctly.');
             setFormMessageColor('red');
+            return;
+        }
+        if (isLoading) {
             return;
         }
         try {
@@ -87,6 +104,11 @@ const Contact: React.FC<ContactProps> = (props) => {
             setSubject('');
             setFormMessageColor(colors.blue);
             setIsLoading(false);
+            // Reset touched states after successful submission
+            setNameTouched(false);
+            setEmailTouched(false);
+            setSubjectTouched(false);
+            setMessageTouched(false);
         } catch (error) {
             setFormMessage(
                 'There was an error sending your message. Please try again.'
@@ -99,12 +121,21 @@ const Contact: React.FC<ContactProps> = (props) => {
 
     useEffect(() => {
         if (formMessage.length > 0) {
-            setTimeout(() => {
+            const timer = setTimeout(() => {
                 setFormMessage('');
                 setFormMessageColor('');
             }, 4000);
+            return () => clearTimeout(timer);
         }
     }, [formMessage]);
+
+    // Function to get dynamic style for input borders
+    const getInputStyle = (isValid: boolean, touched: boolean) => {
+        return {
+            ...styles.formItem,
+            ...(touched && !isValid && { borderColor: 'red', borderWidth: 2, borderStyle: 'solid' }),
+        };
+    };
 
     return (
         <div className="site-page-content">
@@ -139,33 +170,35 @@ const Contact: React.FC<ContactProps> = (props) => {
                 <div style={styles.form}>
                     <label>
                         <p>
-                            {!name.trim() && <span style={styles.star}>*</span>}
+                            {/* Always show asterisk for required fields */}
+                            <span style={styles.star}>*</span>
                             <b>Your name:</b>
                         </p>
                     </label>
                     <input
-                        style={styles.formItem}
+                        style={getInputStyle(isNameValid, nameTouched)}
                         type="text"
                         name="name"
                         placeholder="Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        onBlur={() => setNameTouched(true)} // Mark as touched on blur
                     />
                     <label>
                         <p>
-                            {!validateEmail(email) && (
-                                <span style={styles.star}>*</span>
-                            )}
+                            {/* Always show asterisk for required fields */}
+                            <span style={styles.star}>*</span>
                             <b>Email:</b>
                         </p>
                     </label>
                     <input
-                        style={styles.formItem}
+                        style={getInputStyle(isEmailValid, emailTouched)}
                         type="email"
                         name="email"
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        onBlur={() => setEmailTouched(true)} // Mark as touched on blur
                     />
                     <label>
                         <p>
@@ -173,7 +206,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                         </p>
                     </label>
                     <input
-                        style={styles.formItem}
+                        style={styles.formItem} // No validation styling for optional field
                         type="text"
                         name="company"
                         placeholder="Company"
@@ -182,30 +215,34 @@ const Contact: React.FC<ContactProps> = (props) => {
                     />
                     <label>
                         <p>
-                            {!subject.trim() && <span style={styles.star}>*</span>}
+                            {/* Always show asterisk for required fields */}
+                            <span style={styles.star}>*</span>
                             <b>Subject:</b>
                         </p>
                     </label>
                     <input
-                        style={styles.formItem}
+                        style={getInputStyle(isSubjectValid, subjectTouched)}
                         type="text"
                         name="subject"
                         placeholder="Subject"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
+                        onBlur={() => setSubjectTouched(true)} // Mark as touched on blur
                     />
                     <label>
                         <p>
-                            {!message.trim() && <span style={styles.star}>*</span>}
+                            {/* Always show asterisk for required fields */}
+                            <span style={styles.star}>*</span>
                             <b>Message:</b>
                         </p>
                     </label>
                     <textarea
                         name="message"
                         placeholder="Message"
-                        style={styles.formItem}
+                        style={getInputStyle(isMessageValid, messageTouched)}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                        onBlur={() => setMessageTouched(true)} // Mark as touched on blur
                     />
                     <div style={styles.buttons}>
                         <button
@@ -235,13 +272,10 @@ const Contact: React.FC<ContactProps> = (props) => {
                             </p>
                             <p>
                                 <sub>
-                                    {!isFormValid ? (
-                                        <span>
-                                            <b style={styles.star}>*</b> = required
-                                        </span>
-                                    ) : (
-                                        '\xa0'
-                                    )}
+                                    {/* Asterisk always shown, so this is just a legend */}
+                                    <span>
+                                        <b style={styles.star}>*</b> = required
+                                    </span>
                                 </sub>
                             </p>
                         </div>
@@ -253,7 +287,8 @@ const Contact: React.FC<ContactProps> = (props) => {
     );
 };
 
-const styles: StyleSheetCSS = {
+// Assuming StyleSheetCSS is equivalent to React.CSSProperties or similar
+const styles: Record<string, CSSProperties> = {
     form: {
         flexDirection: 'column',
         marginTop: 32,
@@ -261,6 +296,13 @@ const styles: StyleSheetCSS = {
     formItem: {
         marginTop: 4,
         marginBottom: 16,
+        // Default border to blend with your existing styles
+        border: '1px solid #ccc', // Assuming a default border color
+        borderRadius: 4, // Assuming some border radius
+        padding: 8, // Add some padding
+        boxSizing: 'border-box', // Ensure padding doesn't increase total width/height
+        // Transition for smooth border change
+        transition: 'border-color 0.3s ease-in-out',
     },
     socialImage: {
         width: 36,
@@ -272,7 +314,6 @@ const styles: StyleSheetCSS = {
     },
     formInfo: {
         textAlign: 'right',
-
         flexDirection: 'column',
         alignItems: 'flex-end',
         paddingLeft: 24,
@@ -296,7 +337,6 @@ const styles: StyleSheetCSS = {
     social: {
         width: 4,
         height: 4,
-
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 8,

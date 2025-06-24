@@ -37,7 +37,7 @@ const About: React.FC<AboutProps> = (props) => {
                 <br />
                 <p>
                     From a young age, I’ve been drawn to strategy—whether it was
-                    trying to outsmart games like <b>chess</b>or figuring out how to make money as a kid.
+                    trying to outsmart games like <b>chess</b> or figuring out how to make money as a kid.
                     I’ve always liked dissecting how things work, not just technically
                     but conceptually too. That mindset naturally pulled me toward tech
                     and problem-solving.
@@ -114,6 +114,15 @@ const About: React.FC<AboutProps> = (props) => {
                             fashion critic (yet), but it’s something I enjoy learning about, and it’s
                             definitely influencing the direction of my current project.
                         </p>
+                        <br />
+                        <div className="captioned-image">
+                        <img src={meNow} style={styles.image} alt="" />
+                        <p>
+                            <sub>
+                                <b>Figure 2:</b> Me, April 2025
+                            </sub>
+                        </p>
+                    </div>
                         <p>
                             As for TV shows, that’s where I get really into it. Fantasy, action,
                             supernatural elements—those are my sweet spots. I love complex worlds, magical
@@ -131,14 +140,7 @@ const About: React.FC<AboutProps> = (props) => {
                             reading and getting to know me a bit better!
                         </p>
                     </div>
-                    <div style={styles.verticalImage}>
-                        <img src={meNow} style={styles.image} alt="" />
-                        <p>
-                            <sub>
-                                <b>Figure 2:</b> Me, April 2025
-                            </sub>
-                        </p>
-                    </div>
+                    
                 </div>
                 <br />
                 <br />
@@ -170,17 +172,6 @@ const styles: StyleSheetCSS = {
         height: 'auto',
         width: '100%',
         marginBottom: 32,
-    },
-    verticalImage: {
-        alignSelf: 'center',
-        // width: '80%',
-        marginLeft: 32,
-        flex: 0.8,
-
-        alignItems: 'center',
-        // marginBottom: 32,
-        textAlign: 'center',
-        flexDirection: 'column',
     },
 };
 
