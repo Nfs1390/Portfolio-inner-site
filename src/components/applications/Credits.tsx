@@ -9,7 +9,7 @@ const CREDITS = [
     {
         title: 'Engineering & Design',
         rows: [['Henry Heffernan', 'Most of the code'],
-               ['Nasser Al-Sunaid', 'additional code, with some edits'],],
+               ['Nasser Al-Sunaid', 'Additional code, with some edits'],],
     },
     {
         title: 'Modeling & Texturing',
