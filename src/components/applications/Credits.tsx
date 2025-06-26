@@ -25,7 +25,7 @@ const CREDITS = [
             ['Henry Heffernan', 'Mixing, Composition, & Foley'],
             ['Sound Cassette', 'Office Ambience'],
             ['Windows 95 Startup Sound', 'Microsoft'],
-            ['chess sound effects', 'Chess.com'],
+            ['Chess Sound Effects', 'Chess.com'],
         ],
     },
     {
